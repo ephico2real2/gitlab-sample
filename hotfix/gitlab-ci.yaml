@@ -1,0 +1,12 @@
+stages:
+  - build_and_tag
+
+update_version_and_create_tag:
+  stage: build_and_tag
+  script:
+    - apt-get update && apt-get install -y maven
+    - chmod +x update_version_and_create_tag_hotfix.sh
+    - ./update_version_and_create_tag_hotfix.sh
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /-hotfix$/'
+      when: manual
